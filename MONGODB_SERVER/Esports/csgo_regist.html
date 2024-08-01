@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<title>CSGO Registration Form</title>
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+
+		}
+		body{
+				background-image: url(img/unnamed.jpg);
+				background-size: cover;
+				height: 100vh;
+				margin: 0;	
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-family: 'Ubuntu', sans-serif;
+		}
+		.container{
+			background-color: white;
+			border-radius: 7px;
+			overflow: hidden;
+			box-shadow: 0 2px 5px rgba(22, 8, 24, 0.904);
+			width: 437px;
+			max-width: 100%;
+		}
+		.header{
+			text-align: center;
+			padding: 20px;
+			background-color: rgb(39, 38, 38);
+		}
+		.header h2{
+			margin: 0;
+			font-size: 30px;
+		}
+		.main-form{
+			padding: 30px 40px;
+		}
+		.form{
+			padding-bottom: 20px;
+			margin-bottom: 10px;
+			position: relative;
+		}
+		.form input{
+			border: 2px solid #f0f0f0;
+			border-radius: 4px;
+			font-family: inherit;
+			width: 100%;
+			padding: 12px;
+			display: block;
+			font-size: 14px;
+		}
+		.form i{
+			position: absolute;
+			top: 32px;
+			right: 10px;
+			visibility: hidden;
+
+		}
+		.form small{
+			position: absolute;
+			bottom: 0;
+			left: 5px;
+			visibility: hidden;
+
+		}
+		button{
+			width: 100%;
+			font-family: inherit;
+			font-size: 18px;
+			padding: 10px;
+			border-radius: 7px;
+			cursor: pointer;
+			color: white;
+			background-color: rgba(30, 30, 30, 0.904);
+			
+		}
+		button:hover{
+			background-color: rgb(16, 16, 16);
+			color: rgb(255, 255, 255);
+		}
+
+		.h2{
+			color: white;
+		}
+		.slide-up-box {
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    border-radius: 10px;
+    opacity: 0;
+    transform: translateY(-100px);
+    transition: transform 1.5s, opacity 1s;
+}
+
+.slide-up-box.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+		
+
+
+	</style>
+</head>
+<body>
+	<div class="slide-up-box">
+	<div class="container">
+		<div class="header">
+			<h2 class="h2">Registration Form</h2>
+			<div><i style='font-size:24px' class='fas'>&#xf2bd;</i></div>
+		</div>
+			<form action="/csgo_post" method="post" class="main-form" onsubmit="return myfun()">
+				<div class="form">
+					<label for="">Team name</label>
+					<input type="text" placeholder="Enter your CSGO Team Name" name="CSGO_Team_name" id="CSGO_Team_name" autocomplete="off">
+					<i class="fas sucess">&#xf058;</i>
+					<i class="fas error">&#xf06a;</i>
+					<small class="message">error message</small>
+				</div>
+				<div class="form">
+					<label for="">Player ID</label>
+					<input type="number" placeholder="Enter the player id" name="Player_ID" id="Player_ID" autocomplete="off" required>
+					<i class="fas sucess">&#xf058;</i>
+					<i class="fas error">&#xf06a;</i>
+					<small class="message">error message</small>
+				</div>
+
+				<div class="form">
+					<label for="">Team ID</label>
+					<input type="number" placeholder="Enter your Team ID" name="CSGO_Team_ID" id="CSGO_Team_ID" autocomplete="off">
+					<i class="fas sucess">&#xf058;</i>
+					<i class="fas error">&#xf06a;</i>
+					<small class="message">error message</small>
+				</div>
+				
+				<button>Submit</button>
+
+					
+			</form>
+		
+	</div>
+</div>
+	<script>
+
+			// script.js
+// script.js
+document.addEventListener("DOMContentLoaded", function() {
+    const box = document.querySelector(".slide-up-box");
+    setTimeout(() => {
+        requestAnimationFrame(() => {
+            box.classList.add("visible");
+        });
+    }, 100); // Short delay to ensure CSS is applied before transition starts
+});
+
+
+		
+			function myfun(){
+				const username=document.getElementById('username');
+				const email=document.getElementById('email');
+				const password1=document.getElementById('password1');
+				const password2=document.getElementById('password2');
+				const message=document.getElementsByClassName('message');
+				const icon=document.querySelectorAll('i');
+				const sucess=document.getElementsByClassName('sucess');
+				const error=document.getElementsByClassName('error');
+
+				//submit sucess variable//
+				let u=0;
+				let e=0;
+				let p1=0;
+				let p2=0;
+
+
+
+				//validation for username//
+				if(username.value==""){
+					username.style.borderColor = 'red';
+					message[0].style.visibility = 'visible';
+					message[0].style.color='red';
+					message[0].innerText="Username cannot be blank";
+					error[0].style.visibility = 'visible';
+					error[0].style.color='red';
+					u=0;
+				}
+				else if(username.value.length<3&&username.value.length>0){
+					username.style.borderColor = 'red';
+					message[0].style.visibility = 'visible';
+					message[0].style.color='red';
+					message[0].innerText="Username have atleast 3 character";
+					error[0].style.visibility = 'visible';
+					error[0].style.color='red';
+					u=0;
+				}
+				else if(username.value.length>3&&(isNaN(parseFloat(username.value)))){
+					username.style.borderColor = 'green';
+					error[0].style.visibility = 'hidden';
+					message[0].style.visibility = 'hidden';
+					sucess[0].style.visibility = 'visible';
+					sucess[0].style.color='green';
+					u=1;
+
+
+				}
+				else{
+					username.style.borderColor = 'red';
+					message[0].style.visibility = 'visible';
+					message[0].style.color='red';
+					message[0].innerText="Number is not allowed in the beggining";
+					error[0].style.visibility = 'visible';
+					error[0].style.color='red';
+					u=0;
+
+				}
+				//email validation//
+
+				if(email.value==""){
+					email.style.borderColor = 'red';
+					message[1].style.visibility = 'visible';
+					message[1].style.color='red';
+					message[1].innerText="Email cannot be blank";
+					error[1].style.visibility = 'visible';
+					error[1].style.color='red';
+					e=0;
+				}
+				else if(email.value.indexOf('@')<3||email.value.lastIndexOf('.')>=email.value.length-2){
+					email.style.borderColor = 'red';
+					message[1].style.visibility = 'visible';
+					message[1].style.color='red';
+					message[1].innerText="Invalid email";
+					error[1].style.visibility = 'visible';
+					error[1].style.color='red';
+					e=0;
+				}
+				else{
+					email.style.borderColor = 'green';
+					error[1].style.visibility = 'hidden';
+					message[1].style.visibility = 'hidden';
+					sucess[1].style.visibility = 'visible';
+					sucess[1].style.color='green';
+					e=1;
+				}
+				//validation of password//
+
+				var numbers=/[0-9]/g;
+				if (password1.value==""){
+					password1.style.borderColor = 'red';
+					message[2].style.visibility = 'visible';
+					message[2].style.color='red';
+					message[2].innerText="Password cannot be blank";
+					error[2].style.visibility = 'visible';
+					error[2].style.color='red';
+					p1=0;
+				}
+				else if(password1.value.length<9){
+					password1.style.borderColor = 'red';
+					message[2].style.visibility = 'visible';
+					message[2].style.color='red';
+					message[2].innerText="Password must be minimum 8 character";
+					error[2].style.visibility = 'visible';
+					error[2].style.color='red';
+					p1=0;
+				}
+
+				else if(!(password1.value.match(numbers))){
+					password1.style.borderColor = 'red';
+					message[2].style.visibility = 'visible';
+					message[2].style.color='red';
+					message[2].innerText="Password have atleast a number";
+					error[2].style.visibility = 'visible';
+					error[2].style.color='red';
+					p1=0;
+				}
+
+				else{
+					password1.style.borderColor = 'green';
+					error[2].style.visibility = 'hidden';
+					message[2].style.visibility = 'hidden';
+					sucess[2].style.visibility = 'visible';
+					sucess[2].style.color='green';
+					p1=1;
+				}
+
+				//password check//
+				if(password2.value==""){
+					password2.style.borderColor = 'red';
+					message[3].style.visibility = 'visible';
+					message[3].style.color='red';
+					message[3].innerText="Password cannot be blank";
+					error[3].style.visibility = 'visible';
+					error[3].style.color='red';
+					p2=0;
+				}
+				else if(password1.value!=password2.value){
+					password2.style.borderColor = 'red';
+					message[3].style.visibility = 'visible';
+					message[3].style.color='red';
+					message[3].innerText="Password doesnot match";
+					error[3].style.visibility = 'visible';
+					error[3].style.color='red';
+					p2=0;
+				}
+				else{
+					password2.style.borderColor = 'green';
+					error[3].style.visibility = 'hidden';
+					message[3].style.visibility = 'hidden';
+					sucess[3].style.visibility = 'visible';
+					sucess[3].style.color='green';
+					p2=1;
+				}
+
+				//return condition//
+
+				if(u==1&&e==1&&p1==1&&p2==1){
+					return true;
+				}
+				else
+					return false;
+
+			}
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>
